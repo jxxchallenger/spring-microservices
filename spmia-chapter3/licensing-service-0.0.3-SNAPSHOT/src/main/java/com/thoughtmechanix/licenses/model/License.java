@@ -2,7 +2,7 @@ package com.thoughtmechanix.licenses.model;
 
 public class License {
     
-    private String id;
+    private String licenseId;
     
     private String organizationId;
     
@@ -10,12 +10,12 @@ public class License {
     
     private String licenseType;
 
-    public String getId() {
-        return id;
+    public String getLicenseId() {
+        return licenseId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setLicenseId(String licenseId) {
+        this.licenseId = licenseId;
     }
 
     public String getOrganizationId() {
@@ -43,7 +43,7 @@ public class License {
     }
 
     public License withId(String id) {
-        this.setId(id);
+        this.setLicenseId(id);
         return this;
     }
 
