@@ -1,14 +1,22 @@
 package com.thoughtmechanix.licenses.model;
 
 public class License {
-    
+
     private String licenseId;
-    
+
     private String organizationId;
-    
+
     private String productName;
-    
+
     private String licenseType;
+
+    private String organizationName;
+
+    private String contactName;
+
+    private String contactPhone;
+
+    private String contactEmail;
 
     public String getLicenseId() {
         return licenseId;
@@ -42,6 +50,38 @@ public class License {
         this.licenseType = licenseType;
     }
 
+    public String getOrganizationName() {
+        return organizationName;
+    }
+
+    public void setOrganizationName(String organizationName) {
+        this.organizationName = organizationName;
+    }
+
+    public String getContactName() {
+        return contactName;
+    }
+
+    public void setContactName(String contactName) {
+        this.contactName = contactName;
+    }
+
+    public String getContactPhone() {
+        return contactPhone;
+    }
+
+    public void setContactPhone(String contactPhone) {
+        this.contactPhone = contactPhone;
+    }
+
+    public String getContactEmail() {
+        return contactEmail;
+    }
+
+    public void setContactEmail(String contactEmail) {
+        this.contactEmail = contactEmail;
+    }
+    
     public License withId(String id) {
         this.setLicenseId(id);
         return this;
@@ -61,4 +101,26 @@ public class License {
         this.setLicenseType(licenseType);
         return this;
     }
+
+    public License withOrganizationName(String organizationName) {
+        this.setOrganizationName(organizationName);
+        return this;
+    }
+
+    public License withContactName(String contactName) {
+        this.setContactName(contactName);
+        return this;
+    }
+
+    public License withContactPhone(String contactPhone) {
+        this.setContactPhone(contactPhone);
+        return this;
+    }
+
+    public License withContactEmail(String contactEmail) {
+        this.setContactEmail(contactEmail);
+        return this;
+    }
+
+    
 }

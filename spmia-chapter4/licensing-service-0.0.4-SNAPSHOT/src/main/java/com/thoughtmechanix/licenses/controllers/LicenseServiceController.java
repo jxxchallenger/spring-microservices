@@ -33,6 +33,11 @@ public class LicenseServiceController {
         return this.licenseService.getLicense(organizationId, licenseId);
     }
     
+    @GetMapping(value = {"/{licenseId}/{clientType}"})
+    public License getLicensesWithClient(@PathVariable(value = "organizationId") String organizationId, @PathVariable(value = "licenseId") String licenseId, @PathVariable(value = "clientType") String clientType) {
+        return this.licenseService.getLicense(organizationId, licenseId, clientType);
+    }
+    
     @PostMapping
     public void saveLicense(@RequestBody License license) {
         this.licenseService.saveLicense(license);

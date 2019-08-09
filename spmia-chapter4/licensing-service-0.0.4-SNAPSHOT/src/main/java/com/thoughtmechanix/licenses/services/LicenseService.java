@@ -8,6 +8,8 @@ public interface LicenseService {
 
     License getLicense(String organizationId, String licenseId);
     
+    License getLicense(String organizationId, String licenseId, String clientType);
+    
     List<License> getLicensesByOrg(String organizationId);
     
     void saveLicense(License license);
