@@ -48,7 +48,16 @@ public class LicenseServiceImpl implements LicenseService {
 
     //@HystrixCommand(commandProperties = {@HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "15000")})
     //@HystrixCommand(commandProperties = {@HystrixProperty(name = HystrixPropertiesManager.EXECUTION_ISOLATION_THREAD_TIMEOUT_IN_MILLISECONDS, value = "15000")}, fallbackMethod = "buildFallbackLicenseList")
-    @HystrixCommand(commandProperties = {@HystrixProperty(name = HystrixPropertiesManager.EXECUTION_ISOLATION_THREAD_TIMEOUT_IN_MILLISECONDS, value = "5000")}, fallbackMethod = "buildFallbackLicenseList")
+    @HystrixCommand(
+            commandProperties = {
+                    @HystrixProperty(name = HystrixPropertiesManager.EXECUTION_ISOLATION_THREAD_TIMEOUT_IN_MILLISECONDS, value = "5000")
+                    }, 
+            fallbackMethod = "buildFallbackLicenseList", 
+            threadPoolKey = "licenseByOrgThreadPool", 
+            threadPoolProperties = {
+                    @HystrixProperty(name = HystrixPropertiesManager.CORE_SIZE, value = "30"),
+                    @HystrixProperty(name = HystrixPropertiesManager.MAX_QUEUE_SIZE, value = "10")
+            })
     @Transactional(readOnly = true)
     @Override
     public List<License> getLicensesByOrg(String organizationId) {
