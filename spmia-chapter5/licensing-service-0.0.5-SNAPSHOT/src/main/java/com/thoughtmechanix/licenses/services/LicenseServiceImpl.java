@@ -50,7 +50,12 @@ public class LicenseServiceImpl implements LicenseService {
     //@HystrixCommand(commandProperties = {@HystrixProperty(name = HystrixPropertiesManager.EXECUTION_ISOLATION_THREAD_TIMEOUT_IN_MILLISECONDS, value = "15000")}, fallbackMethod = "buildFallbackLicenseList")
     @HystrixCommand(
             commandProperties = {
-                    @HystrixProperty(name = HystrixPropertiesManager.EXECUTION_ISOLATION_THREAD_TIMEOUT_IN_MILLISECONDS, value = "5000")
+                    @HystrixProperty(name = HystrixPropertiesManager.EXECUTION_ISOLATION_THREAD_TIMEOUT_IN_MILLISECONDS, value = "5000"),
+                    @HystrixProperty(name = HystrixPropertiesManager.CIRCUIT_BREAKER_REQUEST_VOLUME_THRESHOLD, value = "10"), //时间窗内请求总数阀值
+                    @HystrixProperty(name = HystrixPropertiesManager.CIRCUIT_BREAKER_ERROR_THRESHOLD_PERCENTAGE, value = "75"), //时间窗内失败请求占比阀值
+                    @HystrixProperty(name = HystrixPropertiesManager.CIRCUIT_BREAKER_SLEEP_WINDOW_IN_MILLISECONDS, value = "7000"), //快速失败时间窗
+                    @HystrixProperty(name = HystrixPropertiesManager.METRICS_ROLLING_STATS_TIME_IN_MILLISECONDS, value = "15000"), //检测服务是否恢复时间窗
+                    @HystrixProperty(name = HystrixPropertiesManager.METRICS_ROLLING_STATS_NUM_BUCKETS, value = "5") //检测服务是否恢复时间窗内发送多少次检测请求
                     }, 
             fallbackMethod = "buildFallbackLicenseList", 
             threadPoolKey = "licenseByOrgThreadPool", 
