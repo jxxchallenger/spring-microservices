@@ -2,6 +2,8 @@ package com.thoughtmechanix.licenses.controllers;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,16 +16,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.thoughtmechanix.licenses.model.License;
 import com.thoughtmechanix.licenses.services.LicenseService;
+import com.thoughtmechanix.licenses.utils.UserContextHolder;
 
 @RestController
 @RequestMapping(value = {"/v1/organizations/{organizationId}/licenses"})
 public class LicenseServiceController {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(LicenseServiceController.class);
+    
     @Autowired
     private LicenseService licenseService;
     
     @GetMapping
     public List<License> getLicenses(@PathVariable(value = "organizationId") String organizationId) {
+        LOGGER.info("LicenseServiceController Correlation id: {}", UserContextHolder.getContext().getCorrelationId());
         return this.licenseService.getLicensesByOrg(organizationId);
     }
     

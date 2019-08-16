@@ -21,6 +21,7 @@ import com.thoughtmechanix.licenses.clients.OrganizationRestTemplateClient;
 import com.thoughtmechanix.licenses.model.License;
 import com.thoughtmechanix.licenses.model.Organization;
 import com.thoughtmechanix.licenses.repository.LicenseRepository;
+import com.thoughtmechanix.licenses.utils.UserContextHolder;
 
 @DefaultProperties(commandProperties = {@HystrixProperty(name = HystrixPropertiesManager.EXECUTION_ISOLATION_THREAD_TIMEOUT_IN_MILLISECONDS, value = "5000")})
 @Service
@@ -68,6 +69,7 @@ public class LicenseServiceImpl implements LicenseService {
     @Transactional(readOnly = true)
     @Override
     public List<License> getLicensesByOrg(String organizationId) {
+        LOGGER.info("LicenseService.getLicensesByOrg  Correlation id: {}", UserContextHolder.getContext().getCorrelationId());
         randomlyRunLong();
         return this.licenseRepository.findByOrganizationId(organizationId);
     }
